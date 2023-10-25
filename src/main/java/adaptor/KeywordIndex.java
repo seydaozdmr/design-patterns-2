@@ -31,6 +31,12 @@ public class KeywordIndex<T extends WithSimpleKeywords>{
         return this.index.getOrDefault(keyword,Collections.emptyList()).stream();
     }
 
+    public Stream<T> findApproximate(String keyword){
+        return this.index.entrySet().stream()
+                .filter(entry -> entry.getKey().contains(keyword.toLowerCase(Locale.ROOT)))
+                .flatMap(entry-> entry.getValue().stream());
+    }
+
     @Override
     public String toString() {
         return this.index.entrySet().stream().flatMap(this::toString).collect(Collectors.joining("\n"));

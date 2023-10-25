@@ -1,18 +1,27 @@
 package adaptor;
 
-public class Video implements WithSimpleKeywords{
+public class Video{
     private String title;
+    private String handle;
 
-    public Video(String title) {
+    public Video(String title, String handle) {
         this.title = title;
+        this.handle = handle;
     }
 
     public String getTitle() {
         return title;
     }
 
+    public String getHandle() {
+        return handle;
+    }
+
     @Override
-    public Iterable<String> getKeywords() {
-        return null;
+    public String toString() {
+        return "Video{" +
+                "title='" + title + '\'' +
+                ", handle='" + handle + '\'' +
+                '}';
     }
 }
