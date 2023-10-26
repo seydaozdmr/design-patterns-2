@@ -15,6 +15,7 @@ public class VideoWithKeyword implements WithSimpleKeywords{
     }
 
     private WordSet createWordSet(){
+        //method triggers this point
         return this.wordSetFactory.apply(this.target.getTitle());
     }
 
