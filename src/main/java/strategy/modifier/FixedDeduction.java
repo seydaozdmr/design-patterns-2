@@ -12,6 +12,6 @@ public class FixedDeduction implements PriceModifier {
 
     @Override
     public Money modify(Money money) {
-        return money.subtract(money);
+        return money.subtract(amount);
     }
 }
