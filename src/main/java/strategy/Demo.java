@@ -1,6 +1,7 @@
 package strategy;
 
 import strategy.modifier.FixedDeduction;
+import strategy.modifier.FixedDeductionWithSpillover;
 import strategy.modifier.GetOneFree;
 
 import java.math.BigDecimal;
@@ -11,6 +12,7 @@ public class Demo {
 
         apply(new TakeTwoOffer(new GetOneFree()));
         apply(new TakeTwoOffer(new FixedDeduction(usd.of(7))));
+        apply(new TakeTwoOffer(new FixedDeductionWithSpillover(usd.of(12))));
     }
 
     private static void apply(TakeTwoOffer offer) {

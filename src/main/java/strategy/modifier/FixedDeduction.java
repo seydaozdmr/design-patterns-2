@@ -1,6 +1,7 @@
 package strategy.modifier;
 
 import strategy.Money;
+import strategy.Pair;
 import strategy.PriceModifier;
 
 public class FixedDeduction implements PriceModifier {
@@ -10,8 +11,9 @@ public class FixedDeduction implements PriceModifier {
         this.amount = amount;
     }
 
+
     @Override
-    public Money modify(Money money) {
-        return money.subtract(amount);
+    public Pair<Money, Money> modify(Pair<Money, Money> pair) {
+        return Pair.of(pair.getFirst(), pair.getSecond().subtract(pair.getSecond().min(this.amount)));
     }
 }

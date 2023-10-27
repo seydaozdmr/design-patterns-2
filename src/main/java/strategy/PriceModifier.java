@@ -1,5 +1,5 @@
 package strategy;
 
 public interface PriceModifier {
-    Money modify(Money money);
+    Pair<Money,Money> modify(Pair<Money,Money> pair);
 }

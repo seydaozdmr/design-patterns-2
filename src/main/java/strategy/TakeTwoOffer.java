@@ -3,19 +3,19 @@ package strategy;
 import java.util.function.Function;
 
 public class TakeTwoOffer {
-    private PriceModifier modifier;
+    private PriceModifier modifier; //strategy
 
     public TakeTwoOffer(PriceModifier modifier) {
         this.modifier = modifier;
     }
 
     public Pair<Book, Book> apply(Book first, Book second) {
-        return this.discountSecond(this.sort(first, second));
-    }
-
-    private Pair<Book, Book> discountSecond(Pair<Book, Book> books) {
-        return books.mapSecond(cheaper ->
-                cheaper.withEffectivePrice(this.modifier.modify(cheaper.getPrice())));
+        Pair<Book,Book> books = this.sort(first,second);
+        return this.modifier.modify(books.map(Book::getPrice,Book::getPrice))
+                .map(
+                        price1 -> books.getFirst().withEffectivePrice(price1),
+                        price2 -> books.getSecond().withEffectivePrice(price2)
+                );
     }
 
     private Pair<Book, Book> sort(Book first, Book second) {
