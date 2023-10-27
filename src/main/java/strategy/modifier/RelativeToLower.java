@@ -1,5 +1,6 @@
 package strategy.modifier;
 
+import strategy.Deduction;
 import strategy.Money;
 import strategy.Pair;
 import strategy.PriceModifier;
@@ -10,7 +11,7 @@ import java.math.BigDecimal;
  * @autor Seyda Özdemir
  * Bu sınıf daha uygun fiyatlı ürüne belirli bir yüzdede indirim uygulayan stratejidir.
  */
-public class RelativeToLower  implements PriceModifier {
+public class RelativeToLower  implements Deduction {
     private BigDecimal factor;
 
     public RelativeToLower(double factor) {
@@ -20,15 +21,8 @@ public class RelativeToLower  implements PriceModifier {
     }
 
     @Override
-    public Pair<Money, Money> modify(Pair<Money, Money> pair) {
-        return this.applyTo(pair.getFirst(),pair.getSecond(),lower(pair).scale(this.factor));
+    public Money from(Pair<Money, Money> pair) {
+        return pair.getFirst().min(pair.getSecond()).scale(factor); //düşük fiyatlı olanı bulup onun fiyatının yüzdesinde indirim yapar.
     }
 
-    private Money lower(Pair<Money,Money> pair){
-        return pair.getFirst().min(pair.getSecond());
-    }
-
-    private Pair<Money,Money> applyTo(Money a,Money b,Money discount){
-        return Pair.of(a,b.subtract(b.min(discount)));
-    }
 }

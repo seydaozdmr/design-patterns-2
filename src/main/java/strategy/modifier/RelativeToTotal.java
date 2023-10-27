@@ -1,5 +1,6 @@
 package strategy.modifier;
 
+import strategy.Deduction;
 import strategy.Money;
 import strategy.Pair;
 import strategy.PriceModifier;
@@ -10,7 +11,7 @@ import java.math.BigDecimal;
  * @author Seyda Özdemir
  * Bu sınıf toplam ürün miktarı üzerinden bir oranda indirim yapar ve ikinci üründen bu indirim düşülür.
  */
-public class RelativeToTotal implements PriceModifier {
+public class RelativeToTotal implements Deduction {
     private BigDecimal factor;
 
     public RelativeToTotal(double factor) {
@@ -20,11 +21,9 @@ public class RelativeToTotal implements PriceModifier {
     }
 
     @Override
-    public Pair<Money, Money> modify(Pair<Money, Money> pair) {
-        return this.applyTo(pair.getFirst(),pair.getSecond(),pair.getFirst().add(pair.getSecond().scale(this.factor)));
+    public Money from(Pair<Money, Money> pair) {
+        return pair.getFirst().add(pair.getSecond()).scale(factor);//iki fiyatı toplayıp belirli oranda indirim döner
+
     }
 
-    private Pair<Money,Money> applyTo(Money a, Money b, Money discount){
-        return Pair.of(a, b.subtract(b.min(discount)));
-    }
 }

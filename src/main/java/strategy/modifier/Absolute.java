@@ -1,5 +1,6 @@
 package strategy.modifier;
 
+import strategy.Deduction;
 import strategy.Money;
 import strategy.Pair;
 import strategy.PriceModifier;
@@ -9,7 +10,7 @@ import strategy.PriceModifier;
  * Bu sınıf ikinci üründen belirli bir fiyat miktarının düşürülmesini hedefleyen stratejidir.
  */
 
-public class Absolute implements PriceModifier {
+public class Absolute implements Deduction {
     private Money amount;
 
     public Absolute(Money amount) {
@@ -18,7 +19,7 @@ public class Absolute implements PriceModifier {
 
 
     @Override
-    public Pair<Money, Money> modify(Pair<Money, Money> pair) {
-        return Pair.of(pair.getFirst(), pair.getSecond().subtract(pair.getSecond().min(this.amount)));
+    public Money from(Pair<Money, Money> pair) {
+        return amount;
     }
 }

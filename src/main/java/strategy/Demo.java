@@ -1,8 +1,6 @@
 package strategy;
 
-import strategy.modifier.Absolute;
-import strategy.modifier.AbsoluteWithSpillover;
-import strategy.modifier.GetSecondFree;
+import strategy.modifier.*;
 
 import java.math.BigDecimal;
 
@@ -10,9 +8,15 @@ public class Demo {
     public static void main(String[] args) {
         Currency usd = new Currency("USD");
 
-        apply(new TakeTwoOffer(new GetSecondFree()));
-        apply(new TakeTwoOffer(new Absolute(usd.of(7))));
-        apply(new TakeTwoOffer(new AbsoluteWithSpillover(usd.of(12))));
+        apply(new GetSecondFree());
+        apply(new FromSecondWithSpillover(new Absolute(usd.of(12))));
+        apply(new FromSecondWithSpillover(new RelativeToTotal(.1)));
+        apply(new FromSecondWithSpillover(new RelativeToTotal(.25)));
+        apply(new Proportional(new Absolute(usd.of(12))));
+    }
+
+    private static void apply(PriceModifier modifier) {
+        apply(new TakeTwoOffer(modifier));
     }
 
     private static void apply(TakeTwoOffer offer) {
