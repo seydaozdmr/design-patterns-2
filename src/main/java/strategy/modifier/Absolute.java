@@ -4,10 +4,15 @@ import strategy.Money;
 import strategy.Pair;
 import strategy.PriceModifier;
 
-public class FixedDeduction implements PriceModifier {
+/**
+ * @autor Seyda Özdemir
+ * Bu sınıf ikinci üründen belirli bir fiyat miktarının düşürülmesini hedefleyen stratejidir.
+ */
+
+public class Absolute implements PriceModifier {
     private Money amount;
 
-    public FixedDeduction(Money amount) {
+    public Absolute(Money amount) {
         this.amount = amount;
     }
 

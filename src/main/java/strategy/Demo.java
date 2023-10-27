@@ -1,8 +1,8 @@
 package strategy;
 
-import strategy.modifier.FixedDeduction;
-import strategy.modifier.FixedDeductionWithSpillover;
-import strategy.modifier.GetOneFree;
+import strategy.modifier.Absolute;
+import strategy.modifier.AbsoluteWithSpillover;
+import strategy.modifier.GetSecondFree;
 
 import java.math.BigDecimal;
 
@@ -10,9 +10,9 @@ public class Demo {
     public static void main(String[] args) {
         Currency usd = new Currency("USD");
 
-        apply(new TakeTwoOffer(new GetOneFree()));
-        apply(new TakeTwoOffer(new FixedDeduction(usd.of(7))));
-        apply(new TakeTwoOffer(new FixedDeductionWithSpillover(usd.of(12))));
+        apply(new TakeTwoOffer(new GetSecondFree()));
+        apply(new TakeTwoOffer(new Absolute(usd.of(7))));
+        apply(new TakeTwoOffer(new AbsoluteWithSpillover(usd.of(12))));
     }
 
     private static void apply(TakeTwoOffer offer) {

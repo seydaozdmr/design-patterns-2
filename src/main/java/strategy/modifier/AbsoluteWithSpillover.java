@@ -4,10 +4,15 @@ import strategy.Money;
 import strategy.Pair;
 import strategy.PriceModifier;
 
-public class FixedDeductionWithSpillover implements PriceModifier {
+/**
+ * @autor Seyda Özdemir
+ * Bu sınıf toplam indirim miktarı 2. üründen daha fazla ise, kalan indirim miktarını 1. üründen düşen bir strateji
+ */
+
+public class AbsoluteWithSpillover implements PriceModifier {
     private Money amount;
 
-    public FixedDeductionWithSpillover(Money amount) {
+    public AbsoluteWithSpillover(Money amount) {
         this.amount = amount;
     }
 

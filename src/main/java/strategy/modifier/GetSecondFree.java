@@ -4,7 +4,7 @@ import strategy.Money;
 import strategy.Pair;
 import strategy.PriceModifier;
 
-public class GetOneFree implements PriceModifier {
+public class GetSecondFree implements PriceModifier {
 
     @Override
     public Pair<Money, Money> modify(Pair<Money, Money> pair) {

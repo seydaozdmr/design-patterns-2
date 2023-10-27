@@ -1,6 +1,5 @@
 package strategy;
 
-import java.util.function.Function;
 
 public class TakeTwoOffer {
     private PriceModifier modifier; //strategy
